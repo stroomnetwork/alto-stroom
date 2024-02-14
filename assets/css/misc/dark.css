@@ -92,3 +92,7 @@
 .dark-mode input[type="range"] {
     color: var(--dark-mode-primary-text-color);
 }
+
+.dark-mode .gh-primary-btn {
+    color: var(--dark-mode-button-text-color) !important;
+}
