@@ -1,4 +1,4 @@
-@import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
+/* @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
 @import "general/fonts.css";
 @import "general/vars.css";
 @import "site/header.css";
@@ -13,4 +13,35 @@
 @import "blog/related.css";
 @import "misc/owl.css";
 @import "misc/utilities.css";
-@import "misc/dark.css";
+@import "misc/dark.css"; */
+
+/* Tailwind CSS */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer components {
+	.icon {
+		@apply select-none fill-current w-[1em] h-[1em] inline-block text-inherit box-content;
+	}
+	.kg-card {
+		@apply not-prose;
+	}
+	.nav {
+		@apply hidden gap-5 lg:flex;
+	}
+	.nav-sm .nav {
+		@apply flex flex-col gap-5 lg:hidden;
+	}
+	footer .nav {
+		@apply flex;
+	}
+	.kg-width-wide,
+	.kg-content-wide > div {
+		grid-column: wide;
+	}
+
+	.kg-width-full {
+		grid-column: full;
+	}
+}

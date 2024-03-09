@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html lang="{{@site.locale}}"{{#match @custom.color_scheme "Dark"}} class="dark-mode"{{/match}}>
-
+<html lang="{{@site.locale}}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title}}</title>
     <link rel="stylesheet" href="{{asset "built/screen.css"}}">
-
+    <meta name="theme-color" content="#0f0d0b" />
     {{ghost_head}}
 </head>
-
-<body class="{{body_class}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}">
-<div class="site">
-
-    <header id="gh-head" class="gh-head gh-outer">
-        <div class="gh-head-inner">
-            <div class="gh-head-brand">
-                <div class="gh-head-brand-wrapper">
+<body class="kg-width-wide kg-width-full">
+    <div class="min-h-screen bg-[#0E0D0B] text-white flex flex-col relative">
+        <div class="backdrop-filter border-b-2 border-white border-opacity-10 backdrop-blur-[56px] z-10  sticky top-0 bg-opacity-10">
+            <header class="flex relative z-50 items-center py-4 container max-w-[1400px]">
+                <div class="flex-1">
                     <a
                         class="gh-head-logo"
                         {{#if @custom.homepage_url}}
@@ -27,93 +23,223 @@
                     >
                         {{#if @site.logo}}
                             <img src="{{@site.logo}}" alt="{{@site.title}}">
-                            {{#if @custom.white_logo_for_dark_mode}}
-                                <img src="{{img_url @custom.white_logo_for_dark_mode}}" alt="{{@site.title}}">
-                            {{/if}}
                         {{else}}
                             {{@site.title}}
                         {{/if}}
                     </a>
                 </div>
-                <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
-                <button class="gh-burger"></button>
-            </div>
-
-            <nav class="gh-head-menu">
-                {{navigation}}
-                {{#unless @site.members_enabled}}
-                    {{#match @custom.navigation_layout "Stacked"}}
-                        <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
-                    {{/match}}
-                {{/unless}}
-            </nav>
-
-            <div class="gh-head-actions">
-                {{#unless @site.members_enabled}}
-                    {{^match @custom.navigation_layout "Stacked"}}
-                        <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
-                    {{/match}}
-                {{else}}
-                    <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
-                    <div class="gh-head-members">
+                <div class="content-center justify-center flex-1 hidden gap-5 font-semibold lg:flex opacity-60">
+                    {{navigation}}
+                    {{!-- <a aria-label="home" class="px-3 py-2" href="/">
+                        Home
+                    </a>
+                    <a aria-label="guides & faq" class="px-3 py-2" href="/">
+                        Guides & FAQ
+                    </a>
+                    <a aria-label="blog" class="px-3 py-2 !opacity-100" href="/">
+                        Blog
+                    </a> --}}
+                </div>
+                <div class="flex items-center justify-end flex-1 gap-2">
+                    {{search}}
+                    <button aria-label="twitter" class="hidden lg:flex justify-center items-center w-10 h-10 rounded-xl border bg-[#14151A] text-white border-white border-opacity-20">
+                        <a href="https://twitter.com/StroomNetwork" target="_blank">
+                            <svg class="w-5 h-5 icon">
+                                {{> "icons/x"}}
+                            </svg>
+                        </a>
+                    </button>
+                    <div class="hidden lg:block gh-head-members">
                         {{#unless @member}}
                             {{#unless @site.members_invite_only}}
-                                {{!-- Sign in is hidden because it's not needed for the Stroom blog --}}
-                                <a class="hidden gh-head-link" href="#/portal/signin" data-portal="signin">Sign in</a>
-                                <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/signup" data-portal="signup">Waitlist &rarr;</a>
+                                <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signup"  data-portal="signup">
+                                        Sign up
+                                    <svg class="flex items-center icon">
+                                        {{> "icons/arrow-right"}}
+                                    </svg>
+                                </button>
                             {{else}}
-                                {{!-- Sign in is hidden because it's not needed for the Stroom blog --}}
-                                <a class="hidden gh-head-btn gh-btn gh-primary-btn" href="#/portal/signin" data-portal="signin">Sign in</a>
+                                <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signin"  data-portal="signin">
+                                    Sign in
+                                    <svg class="flex items-center icon">
+                                        {{> "icons/arrow-right"}}
+                                    </svg>
+                                </button>
                             {{/unless}}
                         {{else}}
-                            <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/account" data-portal="account">Account</a>
+                            <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" data-portal="account">
+                                Account
+                            </button>
                         {{/unless}}
                     </div>
-                {{/unless}}
+                    <button class="block menu lg:hidden">
+                        <svg class="w-7 h-7 icon open">
+                            {{> "icons/burger"}}
+                        </svg>
+                    </button>
             </div>
+            <div class="fixed flex-col open-menu hidden justify-center items-center inset-0 h-screen bg-[#0E0D0B]">
+                <header class="flex self-stretch relative z-50 items-center py-4 container max-w-[1400px]">
+                    <div class="flex-1">
+                        <a
+                            class="gh-head-logo"
+                            {{#if @custom.homepage_url}}
+                                href="{{@custom.homepage_url}}"
+                            {{else}}
+                                href="{{@site.url}}"
+                            {{/if}}
+                        >
+                            {{#if @site.logo}}
+                                <img src="{{@site.logo}}" alt="{{@site.title}}">
+                            {{else}}
+                                {{@site.title}}
+                            {{/if}}
+                        </a>
+                    </div>
+                    <div class="content-center justify-center flex-1 hidden gap-5 font-semibold lg:flex opacity-60">
+                        {{navigation}}
+                    </div>
+                    <div class="flex items-center justify-end flex-1 gap-2">
+                        {{search}}
+                        <button aria-label="twitter" class="hidden lg:flex justify-center items-center w-10 h-10 rounded-xl border bg-[#14151A] text-white border-white border-opacity-20">
+                            <a href="https://twitter.com/StroomNetwork" target="_blank">
+                                <svg class="w-5 h-5 icon">
+                                    {{> "icons/x"}}
+                                </svg>
+                            </a>
+                        </button>
+                        <div class="hidden lg:block gh-head-members">
+                            {{#unless @member}}
+                                {{#unless @site.members_invite_only}}
+                                    <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signup"  data-portal="signup">
+                                        Sign up
+                                        <svg class="flex items-center icon">
+                                            {{> "icons/arrow-right"}}
+                                        </svg>
+                                    </button>
+                                {{else}}
+                                    <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signin"  data-portal="signin">
+                                        Sign in
+                                        <svg class="flex items-center icon">
+                                            {{> "icons/arrow-right"}}
+                                        </svg>
+                                    </button>
+                                {{/unless}}
+                            {{else}}
+                                <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" data-portal="account">
+                                    Account
+                                </button>
+                            {{/unless}}
+                        </div>
+                        <button class="block menu lg:hidden">
+                            <svg class="w-7 h-7 icon close">
+                                {{> "icons/close"}}
+                            </svg>
+                        </button>
+                    </div>
+                </header>
+                <div class="flex items-center flex-1 text-4xl font-semibold text-white nav-sm">
+                    {{navigation}}
+                </div>
+                <div class="w-full mt-auto">
+                    <div class="m-4">
+                    {{#unless @member}}
+                        {{#unless @site.members_invite_only}}
+                            <button class="flex rounded-full font-semibold w-full justify-center text-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signup"  data-portal="signup">
+                                Sign up
+                            </button>
+                        {{else}}
+                            <button class="flex rounded-full font-semibold w-full justify-center text-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signin"  data-portal="signin">
+                                Sign in
+                            </button>
+                        {{/unless}}
+                    {{else}}
+                        <button class="flex rounded-full font-semibold w-full justify-center text-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" data-portal="account">
+                            Account
+                        </button>
+                    {{/unless}}
+                    </div>
+                </div>
+            </div>
+            </header>
         </div>
-    </header>
-
-    {{#is "home"}}
-        {{#if @custom.show_featured_posts}}
-            {{> "featured"}}
-        {{/if}}
-    {{/is}}
-
-    <div class="site-content">
-        {{{body}}}
+        <main class="flex-1">
+            {{{body}}}
+        </main>
+        <footer class="mt-24">
+            <div class="bg-[#171512]">
+                <div class="flex flex-col gap-12 md:flex-row items-center py-10 container max-w-[1250px]">
+                    <div class="flex-1">
+                        <svg class="icon text-[#FFCF24] h-[20px] w-[112px]">
+                            {{> "icons/logo"}}
+                        </svg>
+                    </div>
+                    <div class="flex content-center justify-center flex-1 text-sm opacity-60">
+                        {{navigation}}
+                        {{!-- <a aria-label="home" class="px-3 py-2" href="https://stroom.network/">
+                            Home
+                        </a>
+                        <a aria-label="guides & faq" class="px-3 py-2" href="https://stroom.network/#faq">
+                            Guides & FAQ
+                        </a>
+                        <a aria-label="blog" class="px-3 py-2 !opacity-100" href="https://blog.stroom.network/">
+                            Blog
+                        </a> --}}
+                    </div>
+                    <div class="flex justify-end flex-1 gap-4 text-2xl">
+                        <a aria-label="twitter" href="https://twitter.com/StroomNetwork" target="_blank">
+                        <svg class="icon opacity-60">
+                            {{> "icons/x"}}
+                        </svg>
+                        </a>
+                        <a aria-label="telegram" href="https://t.me/stroomnetwork" target="_blank">
+                            <svg class="icon">
+                                {{> "icons/telegram"}}
+                            </svg>
+                        </a>
+                        <a aria-label="discord" href="https://discord.gg/ZrEBAk94RS" target="_blank">
+                            <svg class="opacity-40 icon">
+                                {{> "icons/discord"}}
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {{!-- <div class="bg-[#1F1D19] py-6">
+                <p class="text-sm text-center opacity-40">Khudolii Yevhenii. All right reserved. © 2023</p>
+            </div> --}}
+        </footer>
     </div>
 
-    <footer class="gh-foot{{#unless @site.secondary_navigation}} no-menu{{/unless}} gh-outer">
-        <div class="gh-foot-inner gh-inner">
-            <div class="gh-copyright">
-                {{@site.title}} © {{date format="YYYY"}}
-            </div>
-            {{#if @site.secondary_navigation}}
-                <nav class="gh-foot-menu">
-                    {{navigation type="secondary"}}
-                </nav>
-            {{/if}}
-            <div class="gh-powered-by">
-                <a href="https://ghost.org/" target="_blank" rel="noopener">Powered by Ghost</a>
-            </div>
-        </div>
-    </footer>
-
-</div>
-
-{{#is "post, page"}}
+{{!-- {{#is "post, page"}}
     {{> "pswp"}}
-{{/is}}
+{{/is}} --}}
 
-<script
-    src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous">
-</script>
-<script src="{{asset "built/main.min.js"}}"></script>
+{{!-- <script src="{{asset "built/main.min.js"}}"></script> --}}
 
-{{ghost_foot}}
+{{!-- {{ghost_foot}} --}}
 
 </body>
+<script>
+    let isOpen = false
+    const menu = document.querySelectorAll(".menu")
+    const open = document.querySelector(".open")
+    const close = document.querySelector(".close")
+    menu.forEach(element => {
+        element.addEventListener("click", () => {
+            document.querySelector(".open-menu").style.display = isOpen ? "none" : "flex"
+            close.style.display = isOpen ?  "none" : "block"
+            open.style.display =  isOpen ? "block" : "none"
+            isOpen = !isOpen
+            if (isOpen) {
+                document.body.style.height = "100%"
+                document.body.style.overflow = "hidden"
+            } else {
+                document.body.style.height = "100%"
+                document.body.style.overflow = "scroll"
+            }
+        })
+    })
+</script>
+{{ghost_foot}}
 </html>

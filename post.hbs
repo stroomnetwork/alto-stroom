@@ -1,53 +1,131 @@
 {{!< default}}
 
-<div class="content-area">
-<main class="site-main">
+{{#post}}
 
-    {{#post}}
-
-    <article class="{{post_class}}{{#unless feature_image}} no-image{{/unless}} single-post">
-
-        <header class="article-header gh-canvas">
-            <div class="post-meta">
-                <span class="post-meta-item post-meta-date">
-                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date published_at}}</time>
-                </span>
-                {{#if reading_time}}
-                    <span class="post-meta-item post-meta-length">{{reading_time}}</span>
-                {{/if}}
-                {{#if @site.comments_enabled}}
-                    {{comment_count class="post-meta-item"}}
-                {{/if}}
-                {{#primary_tag}}
-                    <span class="post-meta-item post-meta-tags"><a class="post-tag post-tag-{{slug}}" href="{{url}}" title="{{name}}">{{name}}</a></span>
-                {{/primary_tag}}
+<article class="bg-[#0E0D0B] text-white">
+    <main class="container">
+        <div class="flex flex-col gap-10 max-w-[960px] text-xl mx-auto py-10 [&_p]:opacity-60">
+            <div class="flex gap-5 text-xl">
+                <a class="hover:underline" href="/">
+                    Blog
+                </a>
+                <p class="opacity-40">/</p>
+                <p class="opacity-40">{{title}}</p>
             </div>
-            <h1 class="post-title">{{title}}</h1>
-            {{> "post-image"}}
-        </header>
 
-        <div class="gh-content gh-canvas">
-            {{content}}
+            <div class="flex flex-col gap-5">
+                <h3 class="text-5xl font-semibold">{{title}}</h3>
+                <div class="flex flex-col gap-5">
+                    <p>{{excerpt}}</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center justify-between gap-4 text-sm sm:flex-row">
+                {{#primary_author}}
+                    <div class="flex items-center gap-2">
+                        {{#if profile_image}}
+                            <img
+                                class="object-cover w-8 h-8 rounded-full" 
+                                src="{{img_url profile_image size="xs"}}"
+                                loading="lazy"
+                                alt="{{name}}" 
+                                width="32"
+                                height="32"
+                            />
+                        {{else}}
+                            <div class="flex items-center justify-center w-8 h-8 mx-auto font-bold text-white rounded-full">
+                                {{> "icons/account"}}
+                            </div>
+                        {{/if}}
+                        <span class="font-medium text-[18px] leading-[26px] opacity-100">{{name}}</span>
+                        <p>&#x2022;</p>
+                        <p>
+                            <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMMM YYYY"}}</time>
+                        </p>
+                    </div>
+                {{/primary_author}}
+                <div class="flex gap-4">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-2xl opacity-60 icon">
+                            {{> "icons/time"}}
+                        </svg>
+                        <p>{{reading_time}}</p>
+                    </div>
+                    {{!-- <div class="opacity-60">&#x2022;</div> --}}
+                    {{!-- <div class="flex items-center gap-2">
+                        <svg class="w-6 h-5 text-3xl opacity-60 icon">
+                            {{> "icons/eye"}}
+                        </svg>
+                        <p>55</p>
+                    </div> --}}
+                </div>
+            </div>
+
+            {{#if feature_image}}
+                <img width="960" height="520" src="{{img_url feature_image size="l"}}" alt="feature image"/>
+            {{/if}}
         </div>
 
-        {{#if @custom.show_author}}
-            {{> "author-box"}}
-        {{/if}}
+        <div class="flex flex-col gap-10 py-10 mx-auto text-xl">
+            <div
+                class="prose prose-xl prose-a:text-white prose-a:text-opacity-65 prose-p:text-xl prose-invert prose-headings:text-white text-opacity-60 text-white prose-h6:font-bold prose-h6:text-2xl max-w-[960px] mx-auto"
+            >
+                {{content}}
+            </div>
+            <div class="text-center max-w-[640px] mx-auto">
+                <div>
+                    {{#primary_author}}
+                        {{#if profile_image}}
+                            <img
+                                class="object-cover w-20 h-20 mx-auto rounded-full"
+                                src="{{img_url profile_image size="xs"}}"
+                                loading="lazy"
+                                alt="{{name}}" 
+                                width="80"
+                                height="80"
+                            />
+                        {{else}}
+                            <div class="flex items-center justify-center w-20 h-20 mx-auto font-bold text-white rounded-full">
+                                {{> "icons/account"}}
+                            </div>
+                        {{/if}}
+                    {{/primary_author}}
+                    {{#primary_author}}
+                        <h6 class="mt-2 text-2xl font-medium">{{name}}</h6>
+                    {{/primary_author}}
+                    {{!-- <div class="font-medium mt-2 text-sm text-[#12CCE5]">Co-Founder</div> --}}
+                </div>
+                <div class="flex justify-center gap-4 text-4xl text-white text-opacity-60">
+                    {{#primary_author}}
+                        {{#if twitter}}
+                            <a href="{{twitter_url}}" target="_blank" rel="noopener">
+                                <svg class="w-5 h-5 text-2xl icon">
+                                    {{> "icons/x"}}
+                                </svg>
+                            </a>
+                        {{/if}}
+                    {{/primary_author}}
+                </div>
+                {{#primary_author}}
+                    <p class="mt-4 !opacity-100 text-[14px] leading-[20px]">
+                        {{bio}}
+                    </p>
+                {{/primary_author}}
+            </div>
+        </div>
+        {{#get "posts" filter="id:-{{id}}" include="authors,tags" limit="3"}}
+            {{#match posts.length ">" 0}}
+                <div class="max-w-[1200px] mx-auto py-10">
+                    <h6 class="text-2xl font-semibold">View our other posts</h6>
+                    <div class="grid grid-cols-1 gap-6 mt-5 sm:grid-cols-2 lg:grid-cols-3">
+                        {{#foreach posts}}
+                            {{> "card"}}
+                        {{/foreach}}
+                    </div>
+                </div>
+            {{/match}}
+        {{/get}}
+    </main>
+</article>
 
-    </article>
-
-    {{#if comments}}
-        <section class="gh-comments gh-canvas">
-            <h3 class="related-title">Comments ({{comment_count empty="0" singular="" plural=""}})</h3>
-            {{comments title="" count=false}}
-        </section>
-    {{/if}}
-
-    {{#if @custom.show_related_posts}}
-        {{> "related"}}
-    {{/if}}
-
-    {{/post}}
-
-</main>
-</div>
+{{/post}}

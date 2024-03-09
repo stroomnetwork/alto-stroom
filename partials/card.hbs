@@ -1,0 +1,49 @@
+<a
+  class="bg-[#2A2822]/60 flex flex-col overflow-hidden outline rounded-3xl outline-white/20"
+  href="{{url}}"
+>
+  {{#if feature_image}}
+    <img
+      class="object-cover w-full h-[220px]"
+      width="330"
+      height="220"
+      src="{{img_url feature_image size="s" format="webp"}}"
+      alt="{{feature_image_alt}}"
+    />
+  {{/if}}
+  <div class="flex flex-col flex-1 p-5">
+    <h6 class="text-2xl font-semibold line-clamp-3">
+      {{title}}
+    </h6>
+    <p class="flex-1 mt-2 text-sm font-light opacity-60 line-clamp-3">
+      {{excerpt words="32"}}
+    </p>
+    <div class="flex items-center justify-between mt-4">
+      {{#primary_author}}
+        <div class="flex items-center gap-2">
+          {{#if profile_image}}
+            <img
+              class="object-cover rounded-full w-7 h-7"
+              width="28"
+              height="28"
+              src="{{img_url profile_image size="xxs"}}"
+              alt="{{name}}"
+            />
+          {{else}}
+            <div class="flex items-center justify-center mx-auto font-bold text-white rounded-full w-7 h-7">
+                {{> "icons/account"}}
+            </div>
+          {{/if}}
+          <p class="text-xs font-semibold">
+            {{name}}
+          </p>
+        </div>
+      {{/primary_author}}
+      <p class="opacity-60 text-[10px] leading-[14px]">
+        <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">
+          {{date format="DD MMMM YYYY"}}
+        </time>
+      </p>
+    </div>
+  </div>
+</a>

@@ -12,6 +12,7 @@ const zip = require('gulp-zip');
 // postcss plugins
 const easyimport = require('postcss-easy-import');
 const autoprefixer = require('autoprefixer');
+const tailwindcss = require('tailwindcss');
 const cssnano = require('cssnano');
 
 function serve(done) {
@@ -41,7 +42,8 @@ function css(done) {
         postcss([
             easyimport,
             autoprefixer(),
-            cssnano()
+            cssnano(),
+            tailwindcss(),
         ]),
         dest('assets/built/', {sourcemaps: '.'}),
         livereload()
