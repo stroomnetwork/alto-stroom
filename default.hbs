@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="{{@site.locale}}">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7N89EZHHTQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-7N89EZHHTQ');
+    </script>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MJ3L2PHT');</script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&display=swap" rel="stylesheet">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title}}</title>
-    <link rel="stylesheet" href="{{asset "built/screen.css"}}">
-    <meta name="theme-color" content="#0f0d0b" />
+    <link rel="preload" as="style" href="{{asset "built/screen.css"}}">
+    <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}">
+    <meta name="theme-color" content="#0f0d0b">
     {{ghost_head}}
 </head>
 <body class="kg-width-wide kg-width-full">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJ3L2PHT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="min-h-screen bg-[#0E0D0B] text-white flex flex-col relative">
         <div class="backdrop-filter border-b-2 border-white border-opacity-10 backdrop-blur-[56px] z-10  sticky top-0 bg-opacity-10">
             <header class="flex relative z-50 items-center py-4 container max-w-[1400px]">
@@ -22,7 +43,7 @@
                         {{/if}}
                     >
                         {{#if @site.logo}}
-                            <img src="{{@site.logo}}" alt="{{@site.title}}">
+                            <img src="{{@site.logo}}" width="113" height="20" alt="{{@site.title}}">
                         {{else}}
                             {{@site.title}}
                         {{/if}}
@@ -42,35 +63,18 @@
                 </div>
                 <div class="flex items-center justify-end flex-1 gap-2">
                     {{search}}
-                    <button aria-label="twitter" class="hidden lg:flex justify-center items-center w-10 h-10 rounded-xl border bg-[#14151A] text-white border-white border-opacity-20">
-                        <a href="https://twitter.com/StroomNetwork" target="_blank">
-                            <svg class="w-5 h-5 icon">
-                                {{> "icons/x"}}
+                    <a href="https://twitter.com/StroomNetwork" target="_blank" aria-label="twitter" class="hidden lg:flex justify-center items-center w-10 h-10 rounded-xl border bg-[#14151A] text-white border-white border-opacity-20">
+                        <svg class="w-5 h-4 icon">
+                            {{> "icons/x"}}
+                        </svg>
+                    </a>
+                    <div class="hidden lg:block gh-head-members">
+                        <a href="https://app.stroom.network" target="_blank" class="flex cursor-pointer rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4"> 
+                            Launch App
+                            <svg class="flex items-center icon">
+                                {{> "icons/arrow-right"}}
                             </svg>
                         </a>
-                    </button>
-                    <div class="hidden lg:block gh-head-members">
-                        {{#unless @member}}
-                            {{#unless @site.members_invite_only}}
-                                <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signup"  data-portal="signup">
-                                        Sign up
-                                    <svg class="flex items-center icon">
-                                        {{> "icons/arrow-right"}}
-                                    </svg>
-                                </button>
-                            {{else}}
-                                <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signin"  data-portal="signin">
-                                    Sign in
-                                    <svg class="flex items-center icon">
-                                        {{> "icons/arrow-right"}}
-                                    </svg>
-                                </button>
-                            {{/unless}}
-                        {{else}}
-                            <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" data-portal="account">
-                                Account
-                            </button>
-                        {{/unless}}
                     </div>
                     <button class="block menu lg:hidden">
                         <svg class="w-7 h-7 icon open">
@@ -79,7 +83,7 @@
                     </button>
             </div>
             <div class="fixed flex-col open-menu hidden justify-center items-center inset-0 h-screen bg-[#0E0D0B]">
-                <header class="flex self-stretch relative z-50 items-center py-4 container max-w-[1400px]">
+                <nav class="flex self-stretch relative z-50 items-center py-4 container max-w-[1400px]">
                     <div class="flex-1">
                         <a
                             class="gh-head-logo"
@@ -101,35 +105,18 @@
                     </div>
                     <div class="flex items-center justify-end flex-1 gap-2">
                         {{search}}
-                        <button aria-label="twitter" class="hidden lg:flex justify-center items-center w-10 h-10 rounded-xl border bg-[#14151A] text-white border-white border-opacity-20">
-                            <a href="https://twitter.com/StroomNetwork" target="_blank">
-                                <svg class="w-5 h-5 icon">
-                                    {{> "icons/x"}}
+                        <a aria-label="twitter" href="https://twitter.com/StroomNetwork" target="_blank" class="hidden lg:flex justify-center items-center w-10 h-10 rounded-xl border bg-[#14151A] text-white border-white border-opacity-20">
+                            <svg class="w-5 h-4 icon">
+                                {{> "icons/x"}}
+                            </svg>
+                        </a>
+                        <div class="hidden lg:block gh-head-members">
+                            <a href="https://app.stroom.network" target="_blank" class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4">
+                                Launch App
+                                <svg class="flex items-center icon">
+                                    {{> "icons/arrow-right"}}
                                 </svg>
                             </a>
-                        </button>
-                        <div class="hidden lg:block gh-head-members">
-                            {{#unless @member}}
-                                {{#unless @site.members_invite_only}}
-                                    <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signup"  data-portal="signup">
-                                        Sign up
-                                        <svg class="flex items-center icon">
-                                            {{> "icons/arrow-right"}}
-                                        </svg>
-                                    </button>
-                                {{else}}
-                                    <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signin"  data-portal="signin">
-                                        Sign in
-                                        <svg class="flex items-center icon">
-                                            {{> "icons/arrow-right"}}
-                                        </svg>
-                                    </button>
-                                {{/unless}}
-                            {{else}}
-                                <button class="flex rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" data-portal="account">
-                                    Account
-                                </button>
-                            {{/unless}}
                         </div>
                         <button class="block menu lg:hidden">
                             <svg class="w-7 h-7 icon close">
@@ -137,27 +124,15 @@
                             </svg>
                         </button>
                     </div>
-                </header>
+                </nav>
                 <div class="flex items-center flex-1 text-4xl font-semibold text-white nav-sm">
                     {{navigation}}
                 </div>
                 <div class="w-full mt-auto">
                     <div class="m-4">
-                    {{#unless @member}}
-                        {{#unless @site.members_invite_only}}
-                            <button class="flex rounded-full font-semibold w-full justify-center text-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signup"  data-portal="signup">
-                                Sign up
-                            </button>
-                        {{else}}
-                            <button class="flex rounded-full font-semibold w-full justify-center text-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" href="#/portal/signin"  data-portal="signin">
-                                Sign in
-                            </button>
-                        {{/unless}}
-                    {{else}}
-                        <button class="flex rounded-full font-semibold w-full justify-center text-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4" data-portal="account">
-                            Account
-                        </button>
-                    {{/unless}}
+                        <a href="https://app.stroom.network" target="_blank" class="flex cursor-pointer w-full text-2xl text-center justify-center font-semibold rounded-2xl bg-[#FFCF24] items-center gap-1 text-[#0B0C0E] py-[8px] px-4">
+                            Launch App
+                        </a>
                     </div>
                 </div>
             </div>
@@ -169,13 +144,15 @@
         <footer class="mt-24">
             <div class="bg-[#171512]">
                 <div class="flex flex-col gap-12 md:flex-row items-center py-10 container max-w-[1250px]">
-                    <div class="flex-1">
+                    <div class="">
                         <svg class="icon text-[#FFCF24] h-[20px] w-[112px]">
                             {{> "icons/logo"}}
                         </svg>
                     </div>
-                    <div class="flex content-center justify-center flex-1 text-sm opacity-60">
-                        {{navigation}}
+                    <div class="flex content-center justify-center flex-1 text-sm">
+                        <div class="flex flex-col items-center gap-4 md:flex-row">
+                            {{navigation}}
+                        </div>
                         {{!-- <a aria-label="home" class="px-3 py-2" href="https://stroom.network/">
                             Home
                         </a>
@@ -186,11 +163,16 @@
                             Blog
                         </a> --}}
                     </div>
-                    <div class="flex justify-end flex-1 gap-4 text-2xl">
+                    <div class="flex justify-end gap-4 text-2xl">
+                        <a aria-label="youtube" href="https://www.youtube.com/@stroomnetwork" target="_blank">
+                            <svg class="w-5 h-5 scale-125 icon">
+                                {{> "icons/youtube"}}
+                            </svg>
+                        </a>
                         <a aria-label="twitter" href="https://twitter.com/StroomNetwork" target="_blank">
-                        <svg class="icon opacity-60">
-                            {{> "icons/x"}}
-                        </svg>
+                            <svg class="w-5 h-5 icon opacity-60">
+                                {{> "icons/x"}}
+                            </svg>
                         </a>
                         <a aria-label="telegram" href="https://t.me/stroomnetwork" target="_blank">
                             <svg class="icon">
@@ -205,41 +187,191 @@
                     </div>
                 </div>
             </div>
-            {{!-- <div class="bg-[#1F1D19] py-6">
-                <p class="text-sm text-center opacity-40">Khudolii Yevhenii. All right reserved. © 2023</p>
-            </div> --}}
+        <div class="self-stretch flex items-center flex-col justify-center  gap-6 z-0 bg-[#1a1815] py-6">
+          <div class="flex gap-6">
+            <a
+              className="cursor-pointer underline underline-offset-2 hover:underline text-white text-opacity-60 leading-[20px] font-medium"
+              target="_blank"
+              href="https://stroom.network/terms-of-service.pdf"
+              style="text-decoration: underline; color: #ffffff9c;"
+            >
+              Terms of Service
+            </a>
+            <a
+              className="cursor-pointer underline underline-offset-2 hover:underline text-white text-opacity-60 leading-[20px] font-medium"
+              target="_blank"
+              href="https://stroom.network/privacy-notice.pdf"
+              style="text-decoration: underline; color: #ffffff9c;"
+            >
+              Privacy Notice
+            </a>
+          </div>
+          <div class="z-0 flex self-stretch justify-center gap-6 pt-0 text-white text-opacity-60">
+            Copyright © Current Limited 2025
+          </div>
+        </div>
         </footer>
     </div>
 
-{{!-- {{#is "post, page"}}
-    {{> "pswp"}}
-{{/is}} --}}
+    <div class="fixed inset-0 z-50 items-center justify-center hidden text-white bg-black modal-subscribe bg-opacity-80">
+        <div class="relative flex modal-content-subscribe max-w-[584px] mx-2 rounded-3xl bg-[rgba(42,40,34,0.6)] shadow-lg backdrop-blur-[40px] border border-solid border-white border-opacity-20 box-border overflow-hidden flex-col items-center text-center p-20 py-16  mq450:px-2 gap-4">
+            <button class="absolute text-3xl bg-transparent border-none cursor-pointer top-4 right-4" onclick="toggleSubscribeModal();" title="×">
+                <img class="relative w-4 h-4" src="{{asset "/images/icon-close.svg"}}" title="Close" >
+            </button>
+            <div class="flex flex-col gap-5">
+                <div class="mq450:px-2">
+                    <h5 class="mt-0 mb-4 text-4xl font-bold font-orbitron">Join our Waitlist</h5>
+                    <p class="text-base text-white text-opacity-40">
+                        Subscribe and receive our newsletters to follow the news about our fresh and fantastic products
+                    </p>
+                </div>
+                <div class="w-full mb-0">
+                    <div>
+                        <div class="flex flex-col gap-4">
+                            <div id="input-container" class="flex bg-white border border-solid border-gray-50 border-opacity-10 rounded-xl">
+                                <label class="flex items-center flex-1 gap-1 px-3 py-4 pr-1">
+                                    <img src="{{asset "/images/message.svg"}}" width="20" height="20" alt="message">
+                                    <input name="email" placeholder="Your email address" class="flex-1 text-lg !text-black outline-0">
+                                </label>
+                                <button class="flex items-center gap-1 !text-black px-3 py-4 font-extrabold cursor-pointer mq450:hidden rounded-xl bg-[#12cce5] font-orbitron-h4-36" onclick="submitSubscribe()">
+                                    JOIN US
+                                    <img src="{{asset "/images/send.svg"}}"  width="16" height="16" alt="telegramline">
+                                </button>
+                            </div>
+                            <button class="items-center text-black justify-center hidden gap-1 px-3 py-4 font-extrabold cursor-pointer mq450:flex rounded-xl bg-[#12cce5] font-orbitron-h4-36" onclick="submitSubscribe()">
+                                JOIN US
+                                <img src="{{asset "/images/send.svg"}}"  width="16" height="16" alt="telegramline">
+                            </button>
+                        </div>
+                        <p id="error-text" class="visible m-0 text-left text-red-600 font-dm-sans"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="relative hidden modal-success max-w-[584px] mx-2 rounded-3xl bg-[rgba(42,40,34,0.6)] shadow-lg backdrop-blur-[40px] border border-solid border-white border-opacity-20 box-border overflow-hidden flex-col items-center text-center p-20 py-16  mq450:px-2 gap-4">
+			<div class="flex flex-col items-center justify-center gap-10 text-text-base-inverted ">
+				<img src="{{asset "/images/success.svg"}}"  width="36" height="36" alt="success">
+				<div class="flex flex-col gap-4">
+					<h5 class="m-0 text-4xl font-bold font-orbitron">Congradulation</h5>
+					<p class="m-0 text-base mq450:text-sm text-text-base-secondary font-caption-l-medium opacity-80">
+						Subscribe and receive our newsletters to follow the news about our fresh and fantastic products
+					</p>
+				</div>
+				<button
+					class="flex items-center gap-1 px-3 py-4 !text-black font-extrabold cursor-pointer rounded-xl bg-[#12cce5] font-orbitron-h4-36"
+                    onclick="toggleSubscribeModal();"
+				>
+					CLOSE
+				</button>
+			</div>
+        </div>
+    </div>
+    <script>
+        var _scq = _scq || [];
+        var _scs = _scs || {};
 
-{{!-- <script src="{{asset "built/main.min.js"}}"></script> --}}
+        _scs.teamId = "U7h0iQohldiIPGpE9utbig";
 
-{{!-- {{ghost_foot}} --}}
+        (function () {
+            var dc = document.createElement("script");
+            dc.type = "text/javascript";
+            dc.async = true;
+            dc.src = "//cdn.sendx.io/prod/U7h0iQohldiIPGpE9utbig.js";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(dc, s);
+        })();
+    </script>
+    <script>
+        const validateEmail = (email) => {
+            return String(email)
+                .toLowerCase()
+                .match(
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                );
+        };
 
-</body>
-<script>
-    let isOpen = false
-    const menu = document.querySelectorAll(".menu")
-    const open = document.querySelector(".open")
-    const close = document.querySelector(".close")
-    menu.forEach(element => {
-        element.addEventListener("click", () => {
-            document.querySelector(".open-menu").style.display = isOpen ? "none" : "flex"
-            close.style.display = isOpen ?  "none" : "block"
-            open.style.display =  isOpen ? "block" : "none"
-            isOpen = !isOpen
-            if (isOpen) {
-                document.body.style.height = "100%"
-                document.body.style.overflow = "hidden"
-            } else {
-                document.body.style.height = "100%"
-                document.body.style.overflow = "scroll"
+        const emailElemenent = document.querySelector("input[name='email']")
+        function submitSubscribe() {
+            const email = emailElemenent.value;
+            if (email.trim() === "") {
+                document.querySelector("#input-container").style.borderColor = "red"
+                document.querySelector("#error-text").innerHTML = "Please enter a valid email address"
+                return;
             }
+            if (!validateEmail(email)) {
+                document.querySelector("#input-container").style.borderColor = "red"
+                document.querySelector("#error-text").innerHTML = "Must be valid email"
+                return;
+            }
+            window._scq.push([
+                "identify",
+                {
+                    email: email,
+                    success: function () {
+                        document.querySelector(".modal-content-subscribe").style.display = "none"
+                        document.querySelector(".modal-success").style.display = "flex"
+
+                        document.querySelector("#input-container").style.borderColor = "#fefeff"
+                        document.querySelector("#error-text").innerHTML = ""
+
+                        console.log('success')
+                    },
+                    failure: function () {
+                        console.log("error")
+                    },
+                },
+            ]);
+        }
+
+        const modalSubscribe = document.querySelector(".modal-subscribe");
+        const modalSubscribeContent = document.querySelector(".modal-content-subscribe")
+        const modalSubscribeSuccess = document.querySelector(".modal-success")
+        
+        modalSubscribe.addEventListener("click", (e) => {
+            toggleSubscribeModal();
         })
-    })
-</script>
+        modalSubscribeContent.addEventListener("click", (e) => {
+            e.stopPropagation();
+        })
+        modalSubscribeSuccess.addEventListener("click", (e) => {
+            e.stopPropagation();
+        })
+
+        let isOpenSubscribe = false
+        const toggleSubscribeModal = () => {
+            isOpenSubscribe = !isOpenSubscribe;
+            modalSubscribe.style.display = isOpenSubscribe ? "flex" : "none";
+        };
+    </script>
+    <script>
+        let isOpen = false
+        const menu = document.querySelectorAll(".menu")
+        const open = document.querySelector(".open")
+        const close = document.querySelector(".close")
+        menu.forEach(element => {
+            element.addEventListener("click", () => {
+                document.querySelector(".open-menu").style.display = isOpen ? "none" : "flex"
+                close.style.display = isOpen ?  "none" : "block"
+                open.style.display =  isOpen ? "block" : "none"
+                isOpen = !isOpen
+                if (isOpen) {
+                    document.body.style.height = "100%"
+                    document.body.style.overflow = "hidden"
+                } else {
+                    document.body.style.height = "100%"
+                    document.body.style.overflow = "auto"
+                }
+            })
+        })
+    </script>
+</body>
 {{ghost_foot}}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var links = document.querySelectorAll(".post-content a");
+    links.forEach(function(link) {
+      link.setAttribute("target", "_blank");
+    });
+  });
+</script>
 </html>
